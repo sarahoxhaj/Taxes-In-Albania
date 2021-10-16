@@ -1,0 +1,423 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+<style>
+.parallax { 
+  background-image: url("https://t3.ftcdn.net/jpg/03/55/20/62/360_F_355206259_S6Jnv1soMYb3pF3snNsXttKOTCHbcBDu.jpg");
+  height: 300px; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.myimg{
+    width: 10%;
+   color: red;
+   position: absolute;
+   top: 150px;
+   left: 45%;
+}
+</style>
+<div class="parallax">
+    <img class="myimg" src="https://t3.ftcdn.net/jpg/03/55/20/62/360_F_355206259_S6Jnv1soMYb3pF3snNsXttKOTCHbcBDu.jpg">
+</div>
+
+<h1>Sistemi i taksave ne Shqiperi</h1>
+<h4>Punoi: Sara Hoxhaj, Melisa Kaca, Meviola Karriqi</h4><br>
+<strong><i>Taksa </i></strong>
+<br>
+Detyrim, zakonisht ne para, qe, sipas ligjeve te caktuara, shteti e merr nga shtetasit e vet ose me ane te doganes per te plotesuar buxhetin.
+Detyrim financiar qe personat fizike ose personat juridike jane te detyruar ti paguajne shtetit. Personat qe detyrohen te pauajne taksa quhen ndryshe dhe taksapagues.Ne nje kuptim me te gjere, taksa quhen edhe detyrimet qe individet ose entitetet e ndryshme i paguajne formave organizative ekuivalente me shtetin (siç mund te jene tribuja, levizjet separatiste apo revolucionare, etj.).
+<br> <br>
+<strong><i>Tatim </i></strong>
+<br>
+Takse qe i paguhet shtetit nga shtetasit, nga sipermarrjet etj. per te ardhurat ose per fitimet e tyre.
+Detyrim shteteror te cilit i neshtrohen personat dhe mallrat sipas perkufizimeve ne ligjet administrative te shtetit.Keto detyrime perdoren nga shteti me qellim te institucionalizimit te administrates. Per te arritur mbledhjen e ketyre detyrimeve parashihen procedurat tatimore sipas akteve administrative te shtetit
+<br>
+
+
+<strong>Tabela 1.1</strong><br>
+Te ardhurat nga taksat, perqindja e GDP (1995-2019)
+```{r echo=FALSE,results='asis',tidy=TRUE}
+library(readxl)
+library(knitr)
+library(kableExtra)
+data<-read_excel("~/Desktop/tabela g/tabela1.1.xlsx")
+data %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+
+```
+
+```{r}
+library(ggplot2)
+library(hrbrthemes)
+xValue=c(1995,1996,1997,1998,2002,2003,2004,2011,2012,2013,2014,2015,2016,2017,2018,2019)
+yValue=c(13.6,8.86,9.9,14.57,16.48,17.3,17.97,18.02,17.48,16.5,18.3,18.52,17.59,18.89,18.56,18.29)
+ggplot(data, aes(x=xValue, y=yValue,xlab="Viti",ylab="Te ardhurat ne %")) +
+                     geom_line( color="#69b3a2", size=2, alpha=0.9, linetype=2) +
+                     theme_ipsum() +
+                     xlab("Viti") + 
+                     ylab("Te ardhurat ne %") +
+                     ggtitle("Te ardhurat nga taksat, perqindja e GDP")
+```
+
+<strong>Tabela 1.2 </strong><br>
+Krahasim i te ardhurave nga taksat, perqindja e GDP (2019)
+```{r echo=FALSE,results='asis',tidy=TRUE}
+library(readxl)
+library(knitr)
+data2<-read_excel("~/Desktop/tabela g/tabela1.2.xlsx")
+data2 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+library(ggplot2)
+library("plotly")
+fig <- plot_ly(x = c(34.04,25.34,27.45,18.73,25.58,28.98,16.48,24.66,13.76,14.59,22.48,22.25,20.33,25.61,18.29,17.34,24.67,14.80,22.71,24.07), y = c('Danimarka','Mbreteri e Bashkuar','Suedi','Sllovaki','Austri','Zelanda e Re','Turqi','Itali','Spanje','Rumani','Hungari','Kroaci','Bullgari','Greqi','Shqiperi','Poloni','France','Ceki','Belgjike','Serbi'), type = 'bar', orientation = 'h')
+fig
+```
+
+<p>Nga tabela 1.1 dallojme se ne periudhen 1995-2019, vlera mesatare ka qene 16.3% me nje minimin prej 8,86% ne 1996 dhe maksimum ne 2017 me 18.89% ndersa nga tabela e dyte dallojme se shteti i cili ka te ardhurat me te larta nga taksat eshte Danimarka me 34.04% ndersa ai me te ardhurat me te uleta eshte Spanja me 13,76%.Midis sistemit te taksave dhe GDP ekziston nje maredhenie e cila ndikon ne rritjen apo uljen e te ardhurave te shtetit. Mesatarisht, nje rritje e taksave prej 1%, ul GDP reale me 2 deri ne 3%. Lidhja midis GDP dhe taksave qendron se raporti i i tyre sherben si mates i te ardhurave nga taksat e nje kombi ne krahasim me madhesine e ekonomise se tij te matur nga GDP.</p>
+<br>
+<br>
+<strong> Tabela 2</strong><br>
+Te ardhurat nga taksat e mjedisit dhe llojet e saj
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data3<-read_excel("~/Desktop/tabela g/tabela4.xlsx")
+data3 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+library(ggplot2)
+library("plotly")
+data3 <- read.table(
+            header=TRUE, text=' "Lloji i takses"        Viti  teArdhura
+     1  "Taksat e energjise"    2012      24578
+    2  "Taksat e transportit"      2012      10290
+     3  "Taksat e ndotjes"        2012      1878
+     4  "Taksat e burimeve natyrore"     2012      9
+     5  "Taksat e energjise"    2013      25057
+     6  "Taksat e transportit"       2013      10461
+     7  "Taksat e ndotjes"        2013      1853
+     8  "Taksat e burimeve natyrore"     2013      11
+     9  "Taksat e energjise"    2014      27312
+     10 "Taksat e transportit"       2014      14892
+     11 "Taksat e ndotjes"        2014      1889
+     12 "Taksat e burimeve natyrore"     2014      14
+     13 "Taksat e energjise"    2015      22924 
+     14 "Taksat e transportit"       2015      19255
+     15 "Taksat e ndotjes"        2015      1782
+     16 "Taksat e burimeve natyrore"     2015      19
+     17 "Taksat e energjise"    2016      24539
+     18 "Taksat e transportit"       2016      21342
+     19 "Taksat e ndotjes"        2016      1880
+    20 "Taksat e burimeve natyrore"     2016      16
+     ')
+
+ggplot(data3, aes(factor(Viti), teArdhura, fill = Lloji.i.takses)) + 
+                              geom_bar(stat="identity", position = "dodge") + 
+     ggtitle(" Te ardhurat nga taksat e mjedisit ") +
+                                scale_fill_brewer(palette = "Set1")
+
+```
+
+<p>Ne kete tabele paraqiten te ardhurat e Shqiperise nga taksat e mjedisit nga viti 2012-2016 ne milion leke. Pas studimit te te dhenave, dalim ne perfundim se, deri ne vitin 2016, taksat e energjise zene pjesen me te madhe te te ardhurave, me pas ato te transportit, ndotjes dhe burimeve natyrore. Niveli i te ardhurave nga taksat e burimeve natyrore eshte gati e paperfillshme per shkak te vleres mjaft te vogel qe ajo ka nde krahasim me taksat e tjera dhe fitimit qe ato sjellin per buxhetin e shtetit. Gjithashtu veme re se gjate kesaj periudhe, taksa e transportit eshte rritur me shume se pjesa tjeter e taksave te mjedisit, me 11052 milion leke nga viti 2012 deri ne 2016 nderkohe qe taksa e ndotjes pothuajse nuk ka pesuar asnje ndryshim. </p>
+<br> 
+<br>
+<strong> Tabela 3 </strong><br>
+Sistemi i taksave ne Ballkan ne vitin 2019
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data4<-read_excel("~/Desktop/tabela g/tabela7.xlsx")
+data4 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+library(ggplot2)
+library("plotly")
+Shtetet<-c("Kosova","Shqiperi","Maqedoni","Bosnje","Serbi","Mali i Zi")
+TatimeDirekte<-c(3,6,4,3,5,4)
+TatimeIndirekt<-c(19,10,11,13,16,18)
+TaksaSociale<-c(1,6,8,14,13,11)
+data<-data.frame(Shtetet,TatimeDirekte,TatimeIndirekt,TaksaSociale)
+fig <- plot_ly(data4, x = Shtetet, y = TatimeDirekte, type = 'bar', name = 'Tatime Direkte')
+fig <- fig %>% add_trace(y = TatimeIndirekt, name = 'Tatime Indirekte')
+fig <- fig %>% add_trace(y = TaksaSociale, name = 'Taksa Sociale')
+fig <- fig %>% layout(yaxis = list(title = 'Count'), barmode = 'stack')
+fig
+```
+
+<p> Nga grafiku i kesaj tabele, shohim qe ne vendin tone tatimet direkte perbejne 6% te GDP, tatimet indirekte 10% dhe taksat sociale 6%. Ne krahasim me vendet e Ballkanit dhe ndikimin qe kane keto taksa ne vleren e GDP, shohim se tatimet direkte ndikojne me shume ne Shqiperi, tatimet indirekte ne Kosove dhe taksat sociale ne Bosnje dhe Hercegovine. </p>
+<br>
+<br>
+<strong>Tabela 4</strong><br>
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data5<-read_excel("~/Desktop/tabela g/proveRe.xlsx")
+data5 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+data<-data5
+data %>% 
+     ggplot(aes(x=Viti,y=rritjaGDPNePerqindje, size=TeArdhuratNgaTaksatNeMilionLeke)) +
+     geom_point(alpha=0.6,color="seagreen3")+
+     scale_size_continuous(range = c(1, 7))+
+     labs(x="Viti", y="Rritja e GDP ne %", size="Te ardhurat nga taksat (milion leke)")
+
+```
+<p>Nga kjo tabele dhe nga grafiku bubble chart, arrijme te vezhdojme 3 variabla te ndryshem nga viti 2000 deri ne vitin 2019, te cilet jane : rritja e GDP ne %, te ardhurat nga taksat ne milion leke dhe totali i shpenzimeve. Ne grafik dallojme se GDP ka arritur nivelin e saj me te larte me 8.29% ne vitin 2001 dhe nivelin e saj me te ulet ne vitin 2013 me 1.002%. Gjithashtu shohim se ne vitin 2019 Shqiperia ka pasur nivelin te me te larte te te ardhurave nga taksat me 426271 milion leke dhe nivelin me te ulet me 104112 milion leke ne vitin 2002. Me keto te dhena, arrijme serish te bejme lidhjen midis GDP dhe taksave. Nga grafiku dallojme se sa me i larte te jete niveli i GDP, aq me te uleta jane te ardhurat nga taksat.</p>
+<br>
+<br>
+<strong>Tabela 5</strong><br>
+Te ardhurat tatimore ne vitin 2020
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data6<-read_excel("~/Desktop/tabela g/pie.xlsx")
+data6 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+library(plotrix)
+slices <- c(278984, 21975, 97699, 18953)
+lbls <- c("Tatime dhe dogana", "Pushteti lokal", "Fonde speciale", "Te ardhura jo tatimore")
+pie3D(slices,labels=lbls,explode = 0.3,radius = 1,cex=5, main="Totali i te ardhurave ne vitin 2020 ",col = c("gold1", "tomato1", "powderblue","palegreen2"))
+
+```
+<p>Ne grafikun pie / rrethor shohim se ne vitin 2020, pjesa me e madhe e te ardhurave erdhen nga tatimet dhe doganat dhe me pas nga fondet speciale si psh sigurimet shoqerore apo shendetesore, pushteti lokal dhe te ardhura jo tatimore. Sipas vleres se tyre, tatimet dhe doganat perben 66%, pushteti lokal 5%, fondet speciale 23% dhe te ardhurat jo tatimore rreth 4%.</p>
+<br>
+
+<strong>Tabela 6</strong><br>
+Te ardhurat nga tatimi mbi te ardhurat personale
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data7<-read_excel("~/Desktop/tabela g/rePikash.xlsx")
+data7 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+x=c(9076,15656,28769,29794,38121,41149,46113,50625,58161,64534,74268,87771,107094,110062,113998,119189,116533,111940,123730,125783,131390,139541,143464,132412,130354)
+y=c(673,814,1167,3138,4590,6300,6149,6414,6852,7402,8580,14850,24498,26820,27058,27967,27989,29570,21479,29661,31412,32102,36517,46124,33658)
+plot(x, y, main = "Te ardhurat ne milion leke",
+      xlab = "Tatimi mbi vleren e shtuar", ylab = "Tatimi mbi te ardhurat personale",
+      pch = 19, frame = FALSE)
+abline(lm(y ~ x, data = data7), col = "blue")
+
+```
+<p>Per keto te dhena, krijimi i nje reje pikash dhe vijes se regresit nga ndihmojme te kuptojme nese ekziston nje marredhenise midis tatimit mbi te ardhurat personale dhe tatimit mbi vleren e shtuar (TVSH) dhe se cila do te jete ecuria e tyre ne te ardhmen. Pas ndertimit te grafikut dhe me ndihmen e drejtezes se regresit, kuptojme se midis 2 variablave ekziston nje lidhje e forte lineare pozitive gje qe na le te kuptojme se edhe ne vitet ne vijim, nje rritje ne vlere e TVSH, do te ndikoje ne rritjen e vleres se tatimit mbi te ardhurat personale </p>
+<br>
+
+<strong>Tabela 7</strong><br>
+Krahasim i pages minimale dhe TVSH ne vendet e Ballkanit
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data8<-read_excel("~/Desktop/tabela g/pagaMinimale.xlsx")
+data8 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+library(plotly)
+Shtetet <- c("Kroaci", "Bullgari", "Greqi","Rumani","Bosnje","Serbi","Shqiperi","Kosove","Maqedoni","Mali i Zi")
+pagaMinimale<- c(546,311,758,466,207,343,213,174,282,331)
+tvsh <- c(136.50,62.20,174.34,88.54,35.19,68.60,42.60,27.84,50.76,69.51)
+data <- data.frame(Shtetet, pagaMinimale, tvsh)
+fig <- plot_ly(data, x = Shtetet, y = ~pagaMinimale, type = 'bar', name = 'Paga minimale, euro/muaj',marker = list(color = ' #1E7DB6'))
+fig <- fig %>% add_trace(y = ~tvsh, name = 'Sasia qe shkon per tvsh',marker = list(color = '#34A6EC'))
+fig <- fig %>% layout(yaxis = list(title = 'Euro'), barmode = 'stack')
+fig
+```
+<p>Nga kjo tabele arrijme te bejme krahasimin e pages minimale ne vendet e Ballkanit dhe TVSH qe paguan cdo qytatar. Shteti i cili ka pagen minimale dhe tatimin mbi vleren e shtuar me vlere me te ulet eshte Kosova ndersa Greqia ka pagen miminale dhe TVSH me vlere me te larte ne Ballkan. Duke studiuar grafikun, shohim se ne Shqiperi, me nje page minimale 213 Euro/muaj, mesatarisht 42.6€ shkojne per tatimin mbi vleren e shtuar. </p>
+<br>
+<br>
+<strong>Tabela 8</strong><br>
+Te ardhurat e shtetit nga tatimet ne periudhen 2010-2020
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data9<-read_excel("~/Desktop/tabela g/meviola.xlsx")
+data9 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+library(ggplot2)
+data9<-read.table(
+         header=TRUE, text='"Lloji i tatimit" viti vlera
+     1 "nga tatimet dhe doganat" 2010 223019
+      2 "nga pushteti lokal" 2010 11898
+      3 "nga fondet speciale" 2010 53647
+      4 "nga tatimet dhe doganat" 2011 235509
+      5 "nga pushteti lokal" 2011 11791
+      6 "nga fondet speciale" 2011 56627
+      7 "nga tatimet dhe doganat" 2012 232591
+      8 "nga pushteti lokal" 2012 10859
+      9 "nga fondet speciale" 2012 57411
+      10 "nga tatimet dhe doganat" 2013 229031
+      11 "nga pushteti lokal" 2013 10825
+      12 "nga fondet speciale" 2013 60033
+      13 "nga tatimet dhe doganat" 2014 253413
+      14 "nga pushteti lokal" 2014 12447
+      15 "nga fondet speciale" 2014 70008
+      16 "nga tatimet dhe doganat" 2015 258882
+      17 "nga pushteti lokal" 2015 11700
+      18 "nga fondet speciale" 2015 71726
+      19 "nga tatimet dhe doganat" 2016 275780
+      20 "nga pushteti lokal" 2016 14951
+      21 "nga fondet speciale" 2016 79153
+      22 "nga tatimet dhe doganat" 2017 293386
+      23 "nga pushteti lokal" 2017 18447
+      24 "nga fondet speciale" 2017 86795
+      25 "nga tatimet dhe doganat" 2018 304318
+      26 "nga pushteti lokal" 2018 21863
+      27 "nga fondet speciale" 2018 93153
+      28 "nga tatimet dhe doganat" 2019 304758
+      29 "nga pushteti lokal" 2019 23102
+      30 "nga fondet speciale" 2019 98411
+      31 "nga tatimet dhe doganat" 2020 278984
+      32 "nga pushteti lokal" 2020 21975
+      33 "nga fondet speciale" 2020 97699
+      '
+      )
+
+ggplot(data9, aes(factor(viti), vlera, fill = Lloji.i.tatimit)) + 
+          geom_bar(stat="identity", position = "dodge") + 
+          ggtitle(" Te ardhurat e shtetit (milion leke) ") +
+          scale_fill_brewer(palette = "Set1")
+
+```
+<p>Per te dale ne perfundimin se cili nga tatimet ndikon me shume buxhetin e shtetit, kemi ndertuar tabelen dhe grafikun ne te cilet shohim se mesatarisht 262697 milion leke jane fitim nga tatimet dhe doganat, 15442 milion leke jane nga pushteti lokal dhe 74696 nga fondet speciale. Lloji i tatimit qe ndihmon me shume ne rritjen e te ardhurave te shtetit eshte ai nga tatimet dhe doganat i cili arriti vleren e tij maksimale ne vitin 2019 me 304758 milion leke. Nderkohe tatimi nga pushteti lokal eshte tatimi i cili nuk ka pesuar shume ndryshime me kalimin e viteve dhe ka qene i qendrueshem ne vlera ndryshe nga dy tatimet e tjera te cilat kane pasur rritje te ndjeshme.</p>
+<br>
+<br>
+<strong>Tabela 9</strong><br>
+Vlera e tatimit mbi te ardhurat personale ne Shqiperi
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data10<-read_excel("~/Desktop/tabela g/melisa.xlsx")
+data10 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+df<-data.frame(x=factor(c("0-30000","30001-150000","150001")),y=c(0,13,23))
+
+ggplot(df,aes(x,y))+geom_bar(stat="identity",fill="cornflowerblue")+
+                              labs(x="Paga", y="Taimi mbi fitimin ne %")+
+                                       geom_text(aes(label=y),vjust=0)
+
+```
+<p>Tatimi mbi te ardhurat personale eshte nje sasi e caktuar parash qe terhiqet cdo muaj nga paga e qytatetareve ne baze te te ardhurave te tyre. Duke pare grafikun dhe tabelen, shohim se ne Shqiperi, per nje page qe varion nga 0 deri ne 30000 leke, shteti ka vendosur nje tatim prej 0%. Per nje page duke filluar nga 30001 leke deri ne 150000 leke, qytetari tatohet 13% te shumes mbi 30000 lek ndersa per vlera duke filluar nga 150001 leke, tatimi eshte 15600 leke + 23% te shumes mbi 150000 leke. </p>
+<br>
+<br>
+<strong>Tabela 10</strong><br>
+Niveli i tatimit mbi te ardhurat personale
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data11<-read_excel("~/Desktop/tabela g/melisa1.xlsx")
+data11 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+fig <- plot_ly(x = c(53.75,55,32.30,50,45,45,45,43,23,10,10,10), y = c('Finlanda','Austria','Suedi','Belgjika','France','Gjermani','Greqi','Itali','Shqiperi','Serbi','Kosove','Maqedoni'), type = 'bar', orientation = 'h')
+fig
+```
+<p>Duke pasur parasysh vleren e tatimit mbi te ardhurat personale ne Shqiperi, mund te bejme nje krahasim me vende te ndryshme te Ballkanit dhe Europes. Nga grafiku veme re se shteti me vleren me te larte te ketij tatimi eshte Austria me 55% ndersa Serbia, Kosova dhe Maqedonia kane tatim prej 10%. Gjithashtu veme re se ne krahasim me keto tre vende te Ballkanit, vendi yne ka vleren me te larte te tatimit mbi te ardhurat personale.</p>
+<br>
+<br>
+<strong>Tabela 11</strong><br>
+Te ardhurat e Shqiperise nga taksat
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data12<-read_excel("~/Desktop/tabela g/TabelaEPare.xlsx")
+data12 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+a<-c("04/20","05/20","06/20","07/20","08/20","09/20","10/20","11/20","12/20","01/21","02/21","03/21")
+b<-c(790048,969596,1226268,1502242,1822135,2065726,2321951,2585722,2962570,240518,479887,749988)
+barplot(b,names.arg=a,xlab="periudha",ylab="te ardhurat ne billion",col="#71bc6c",
+        main="Te ardhurat e Shqiperise nga taksat",border="#71bc6c")
+```
+<p>Ne kete tabele kemi te dhena per te ardhurat e Shqiperise nga taksat ne milion dollare per muaj te ndryshem ne vitet 2020 dhe 2021. Shohim se vlera me ulet eshte arritur ne Janar te vitit 2021 me vleren 240518 milion dollare ndersa vlera me e larte ka vlere 2962570 ne dhjetor te vitit 2020. Mesatarisht, gjate kesaj periudhe, vendi yne ka arritur nje shume prej 1476383 milion dollare te ardhura nga taksat.</p>
+<br>
+<br>
+<strong>Tabela 12</strong><br>
+Te ardhurat e shtetit nga tatimi mbi te ardhurat personale
+```{r echo=FALSE,results='asis',tidy=TRUE,message=FALSE}
+library(readxl)
+library(knitr)
+data13<-read_excel("~/Desktop/tabela g/nifi.xlsx")
+data13 %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+```{r,tidy=TRUE,message=FALSE}
+x=c(1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019)
+y=c(673,814,1167,3138,4590,6300,6149,6414,6852,7402,8580,14850,24498,26820,27058,27967,27989,29570,21479,29661,31412,32102,36517,46124)
+plot(x, y, type = "b", pch = 19, col="cadetblue", xlab = "Viti", ylab = "Milion leke")
+```
+
+<strong><i>Perfundime</i></strong><br>
+<p>Nga studimi i sistemit te taksave ne Shqiperi, ndryshimit te yre nder vite dhe ndikimi ne zhvillimin ekonomik te vendit, dalim ne disa perfundime te cilat mendojme se e bejne sado pak me te qarte problematiken e taksave dhe vleres se tyre ne vendin tone.</p>
+<ul>
+<li>Rritja e taksave me 1% ul GDP me 2-3%. => Vleresim dhe vemendje ndaj GDP. Ulja e GDP dhe rritja e taksave, ul te ardhurat e qytetareve, ul konsumin dhe shkurton vendet e punes.</li>
+<li>Kujdes ne percaktimin e vlerave te taksave te mjedisit. Taksat mjedisore i kushtojne shqiptareve me shume se cdo qytetari europian. Te vetmet qe i afrohen niveleve te vendit tone jane shtetet e Europes Lindore qe kane nje cmim me te larte te karburanteve. Duke u krahasuar me BE, shpenzimet tona per mjedisin zene 10 here me pak peshe</li>
+<li>Shqiperia ka vleren me te larte ne perqindje te tatimeve direkte ne krahasim me vendet e Ballkanit. Tatimet direkte perfshijne : tatimi mbi te ardhurat, tatmimi i korporatave, tatimi i prones, mbi trashegimine etj.</li>
+<li>Vlera mesatare e tatimit mbi te ardhurat ne Shqiperi eshte afersisht sa dyfishi i atyre ne Kosove, Serbi, Maqedoni e Rumani, vende te cilat kane vlere me te larte te pages minimale.</li>
+</ul>
+<br>
+
+<i><strong>Referenca</strong></i>
+<br>
+<http://www.instat.gov.al/media/4531/njoftim-per-media-taksat-e-mjedisit-2016.pdf>
+<br>
+<https://www.financa.gov.al/>
+<br>
+<https://www.altax.al/en/blog/674-tax-burden-its-structuring-and-tax-rates-in-the-western-balkans-in-2018-2019>
+<br>
+<https://www.theglobaleconomy.com/Albania/Tax_revenue/>
+<br>
+<https://www.financa.gov.al/wp-content/uploads/2017/09/Analiza_e_te_ardhurave_ne_20_vjet_1992-2012rregulluar.pdf>
+<br>
+<https://www.tatime.gov.al/d/8/45/0/847/ndryshimet-kryesore-te-paketes-fiskale-2019>
+<br>
+<https://www.ceicdata.com/en/indicator/albania/tax-revenue>
+<br>
+<https://www.bankofalbania.org/rc/doc/Analize_krahasuese_e_sistemeve_te_taksave_ne_disa_vende_te_rajonit_1789_1_6318.pdf>
+<br>
+<https://taxsummaries.pwc.com/albania/individual/taxes-on-personal-income>
+
+
